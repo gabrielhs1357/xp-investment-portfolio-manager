@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using InvestmentPortfolioManager.Application.DTOs.Product;
 using InvestmentPortfolioManager.Application.Interfaces;
 
+
 namespace InvestmentPortfolioManager.API.Controllers
 {
     [ApiController]

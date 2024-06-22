@@ -4,7 +4,7 @@ using InvestmentPortfolioManager.Application.Services;
 using InvestmentPortfolioManager.Domain.Repositories;
 using InvestmentPortfolioManager.Infrastructure.Context;
 using InvestmentPortfolioManager.Infrastructure.Repositories;
-using Microsoft.EntityFrameworkCore.Migrations;
+using InvestmentPortfolioManager.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,11 +26,11 @@ builder.Services.AddSqlite<ApplicationContext>(connectionString);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+//Configure the HTTP request pipeline.
 //if (app.Environment.IsDevelopment())
 //{
 //    app.UseSwagger();
-//    app.UseSwaggerUI();
+//app.UseSwaggerUI();
 //}
 
 app.UseHttpsRedirection();
@@ -39,6 +39,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-//await app.MigrateDbAsync();
+await app.MigrateDbAsync();
 
 app.Run();
