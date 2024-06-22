@@ -55,6 +55,7 @@ namespace InvestmentPortfolioManager.Application.Services
         public async Task UpdateAsync(ProductDto productDto)
         {
             var product = _mapper.Map<Product>(productDto);
+
             await _productRepository.UpdateAsync(product);
         }
     }

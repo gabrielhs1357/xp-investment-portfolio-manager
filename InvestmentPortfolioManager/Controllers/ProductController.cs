@@ -6,7 +6,7 @@ using InvestmentPortfolioManager.Application.Interfaces;
 namespace InvestmentPortfolioManager.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/products")]
     public class ProductController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -61,5 +61,5 @@ namespace InvestmentPortfolioManager.API.Controllers
 
             return NoContent();
         }
-    }    
+    }
 }

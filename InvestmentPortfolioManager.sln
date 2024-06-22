@@ -5,6 +5,12 @@ VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPortfolioManager.API", "InvestmentPortfolioManager\InvestmentPortfolioManager.API.csproj", "{34657D5D-BBC7-4431-A3C2-5F27B41B91E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPortfolioManager.Application", "InvestmentPortfolioManager.Application\InvestmentPortfolioManager.Application.csproj", "{535C1E42-35B6-4559-82F5-781A50601592}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPortfolioManager.Domain", "InvestmentPortfolioManager.Domain\InvestmentPortfolioManager.Domain.csproj", "{146D45E1-530F-47BE-9EB9-9A4DFDD74051}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPortfolioManager.Infrastructure", "InvestmentPortfolioManager.Infrastructure\InvestmentPortfolioManager.Infrastructure.csproj", "{E64F2DE0-E72C-4B92-944E-DCC2360A960A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{34657D5D-BBC7-4431-A3C2-5F27B41B91E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{34657D5D-BBC7-4431-A3C2-5F27B41B91E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34657D5D-BBC7-4431-A3C2-5F27B41B91E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{535C1E42-35B6-4559-82F5-781A50601592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{535C1E42-35B6-4559-82F5-781A50601592}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{535C1E42-35B6-4559-82F5-781A50601592}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{535C1E42-35B6-4559-82F5-781A50601592}.Release|Any CPU.Build.0 = Release|Any CPU
+		{146D45E1-530F-47BE-9EB9-9A4DFDD74051}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{146D45E1-530F-47BE-9EB9-9A4DFDD74051}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{146D45E1-530F-47BE-9EB9-9A4DFDD74051}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{146D45E1-530F-47BE-9EB9-9A4DFDD74051}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E64F2DE0-E72C-4B92-944E-DCC2360A960A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E64F2DE0-E72C-4B92-944E-DCC2360A960A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E64F2DE0-E72C-4B92-944E-DCC2360A960A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E64F2DE0-E72C-4B92-944E-DCC2360A960A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
