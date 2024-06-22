@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using InvestmentPortfolioManager.Application.DTOs.Product;
-using InvestmentPortfolioManager.Application.Services;
+using InvestmentPortfolioManager.Domain.Entities;
 
 namespace InvestmentPortfolioManager.Application.Mappings
 {

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using InvestmentPortfolioManager.Application.DTOs.Product;
 using InvestmentPortfolioManager.Application.Interfaces;
+using InvestmentPortfolioManager.Domain.Entities;
+using InvestmentPortfolioManager.Domain.Repositories;
 
 namespace InvestmentPortfolioManager.Application.Services
 {
@@ -50,34 +52,10 @@ namespace InvestmentPortfolioManager.Application.Services
             await _productRepository.DeleteAsync(id);
         }
 
-
         public async Task UpdateAsync(ProductDto productDto)
         {
             var product = _mapper.Map<Product>(productDto);
             await _productRepository.UpdateAsync(product);
         }
-    }
-
-    public interface IProductRepository
-    {
-        Task<IEnumerable<Product?>> GetAllAsync();
-        Task<Product> GetByIdAsync(Guid id);
-        Task AddAsync(Product? asset);
-        Task UpdateAsync(Product asset);
-        Task DeleteAsync(Guid id);
-    }
-
-    public class Product
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public string Description { get; set; }
-        public int AvailableQuantity { get; set; }
-        public decimal Price { get; set; }
-        public bool IsActive { get; set; }
-        public DateTime ExpirationDate { get; set; }
-        public DateTime? Updated { get; set; }
-        public DateTime Created { get; set; }
     }
 }
