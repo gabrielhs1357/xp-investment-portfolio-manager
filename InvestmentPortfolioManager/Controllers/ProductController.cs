@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 
+using InvestmentPortfolioManager.Application.DTOs.Product;
+using InvestmentPortfolioManager.Application.Interfaces;
+
 namespace InvestmentPortfolioManager.API.Controllers
 {
     [ApiController]
@@ -58,56 +61,5 @@ namespace InvestmentPortfolioManager.API.Controllers
 
             return NoContent();
         }
-    }
-
-    public class ProductDto
-    {
-    }
-
-    public class CreateProductDto
-    {
-    }
-
-    public class ProductService : IProductService
-    {
-        public Task<Guid> AddAsync(CreateProductDto productDto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeactivateAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<ProductDto>> GetAllAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ProductDto> GetByIdAsync(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateAsync(ProductDto productDto)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    public interface IProductService
-    {
-        Task<IEnumerable<ProductDto>> GetAllAsync();
-        Task<ProductDto> GetByIdAsync(Guid id);
-        Task<Guid> AddAsync(CreateProductDto productDto);
-        Task UpdateAsync(ProductDto productDto);
-        Task DeleteAsync(Guid id);
-        Task DeactivateAsync(Guid id);
-    }
+    }    
 }
