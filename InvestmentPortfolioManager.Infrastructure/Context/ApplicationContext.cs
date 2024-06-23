@@ -12,6 +12,7 @@ namespace InvestmentPortfolioManager.Infrastructure.Context
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Investment> Investments { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

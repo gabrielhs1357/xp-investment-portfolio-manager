@@ -25,7 +25,7 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
             return await _context.Clients.ToListAsync();
         }
 
-        public async Task<Client> GetByIdAsync(Guid id)
+        public async Task<Client?> GetByIdAsync(Guid id)
         {
             return await _context.Clients.FindAsync(id);
         }

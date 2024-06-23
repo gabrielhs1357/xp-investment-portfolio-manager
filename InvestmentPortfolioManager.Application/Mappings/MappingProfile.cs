@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using InvestmentPortfolioManager.Application.DTOs.Admin;
 using InvestmentPortfolioManager.Application.DTOs.Client;
 using InvestmentPortfolioManager.Application.DTOs.Investment;
 using InvestmentPortfolioManager.Application.DTOs.Product;
@@ -22,6 +23,9 @@ namespace InvestmentPortfolioManager.Application.Mappings
 
             CreateMap<Investment, InvestmentDto>().ReverseMap();
             CreateMap<Investment, CreateInvestmentDto>().ReverseMap();
+
+            CreateMap<Admin, AdminDto>().ReverseMap();
+            CreateMap<Admin, CreateAdminDto>().ReverseMap();
         }
     }
 }
