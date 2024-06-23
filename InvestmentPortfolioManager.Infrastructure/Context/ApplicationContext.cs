@@ -8,6 +8,7 @@ namespace InvestmentPortfolioManager.Infrastructure.Context
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) {}
 
         public DbSet<Product> Products { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
