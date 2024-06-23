@@ -1,10 +1,10 @@
+using InvestmentPortfolioManager.API.Extensions;
 using InvestmentPortfolioManager.Application.Interfaces;
 using InvestmentPortfolioManager.Application.Mappings;
 using InvestmentPortfolioManager.Application.Services;
 using InvestmentPortfolioManager.Domain.Repositories;
 using InvestmentPortfolioManager.Infrastructure.Context;
 using InvestmentPortfolioManager.Infrastructure.Repositories;
-using InvestmentPortfolioManager.Infrastructure.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
