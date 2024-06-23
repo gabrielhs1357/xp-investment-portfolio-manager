@@ -25,6 +25,9 @@ builder.Services.AddTransient<ITransactionService, TransactionService>();
 builder.Services.AddTransient<IClientRepository, ClientRepository>();
 builder.Services.AddTransient<IClientService, ClientService>();
 
+builder.Services.AddTransient<IInvestmentRepository, InvestmentRepository>();
+builder.Services.AddTransient<IInvestmentService, InvestmentService>();
+
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var connectionString = builder.Configuration.GetConnectionString("MainDB");
