@@ -21,6 +21,13 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<Investment>> GetByClientIdAsync(Guid clientId)
+        {
+            return await _context.Investments
+                .Where(i => i.ClientId == clientId)
+                .ToListAsync();
+        }
+
         public async Task<Investment?> GetByClientIdAndProductIdAsync(Guid clientId, Guid productId)
         {
             return await _context.Investments

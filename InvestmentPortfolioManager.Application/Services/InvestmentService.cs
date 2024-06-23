@@ -26,6 +26,13 @@ namespace InvestmentPortfolioManager.Application.Services
             return investment.Id;
         }
 
+        public async Task<IEnumerable<InvestmentDto>> GetByClientIdAsync(Guid clientId)
+        {
+            var investments = await _investmentRepository.GetByClientIdAsync(clientId);
+
+            return _mapper.Map<IEnumerable<InvestmentDto>>(investments);
+        }
+
         public async Task<InvestmentDto> GetByClientIdAndProductIdAsync(Guid clientId, Guid productId)
         {
             var investment = await _investmentRepository.GetByClientIdAndProductIdAsync(clientId, productId);
