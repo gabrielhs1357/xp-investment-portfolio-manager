@@ -1,7 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
-
 using InvestmentPortfolioManager.Application.DTOs.Product;
 using InvestmentPortfolioManager.Application.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 
 namespace InvestmentPortfolioManager.API.Controllers
@@ -43,14 +42,6 @@ namespace InvestmentPortfolioManager.API.Controllers
         public async Task<ActionResult> UpdateProduct(Guid id, [FromBody] ProductDto productDto)
         {
             await _productService.UpdateAsync(productDto);
-
-            return NoContent();
-        }
-
-        [HttpPut("{id}/deactivate")]
-        public async Task<ActionResult> DeactivateProduct(Guid id)
-        {
-            await _productService.DeactivateAsync(id);
 
             return NoContent();
         }

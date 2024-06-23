@@ -7,7 +7,6 @@ namespace InvestmentPortfolioManager.Application.Interfaces
         Task<ProductDto> GetByIdAsync(Guid id);
         Task<Guid> AddAsync(CreateProductDto productDto);
         Task UpdateAsync(ProductDto productDto);
-        Task DeactivateAsync(Guid id);
         Task DeleteAsync(Guid id);
     }
 }

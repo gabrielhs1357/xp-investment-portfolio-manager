@@ -5,7 +5,7 @@ namespace InvestmentPortfolioManager.Application.Interfaces
     public interface ITransactionService
     {
         Task<IEnumerable<TransactionDto>> GetByClientIdAsync(Guid clientId);
-        Task<Guid> CreateBuyTransactionAsync(Guid clientId, CreateTransactionDto transactionDto);
-        Task<Guid> CreateSellTransactionAsync(Guid clientId, CreateTransactionDto transactionDto);
+        Task<Guid> HandleBuyTransactionAsync(Guid clientId, CreateTransactionDto transactionDto);
+        Task<Guid> HandleSellTransactionAsync(Guid clientId, CreateTransactionDto transactionDto);
     }
 }

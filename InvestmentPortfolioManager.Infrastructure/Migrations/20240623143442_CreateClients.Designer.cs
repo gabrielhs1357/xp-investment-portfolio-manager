@@ -3,6 +3,7 @@ using System;
 using InvestmentPortfolioManager.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InvestmentPortfolioManager.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20240623143442_CreateClients")]
+    partial class CreateClients
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
@@ -41,24 +44,6 @@ namespace InvestmentPortfolioManager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clients");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("c35383da-49dd-4b9e-be13-e9ce0577d468"),
-                            Balance = 10000m,
-                            Email = "gabriel123@gmail.com",
-                            FirstName = "Gabriel",
-                            LastName = "Silva"
-                        },
-                        new
-                        {
-                            Id = new Guid("1ad21366-4c91-4b2d-bbfa-96aedef5f6a8"),
-                            Balance = 20000m,
-                            Email = "henrique123@gmail.com",
-                            FirstName = "Henrique",
-                            LastName = "Silveira"
-                        });
                 });
 
             modelBuilder.Entity("InvestmentPortfolioManager.Domain.Entities.Product", b =>
@@ -84,6 +69,9 @@ namespace InvestmentPortfolioManager.Infrastructure.Migrations
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -97,41 +85,6 @@ namespace InvestmentPortfolioManager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("d1552567-b975-45fb-ba7b-da3bf240b4aa"),
-                            AvailableQuantity = 10,
-                            Code = "PDT1",
-                            CreatedAt = new DateTime(2024, 6, 23, 12, 14, 7, 794, DateTimeKind.Local).AddTicks(475),
-                            Description = "Product 1 description",
-                            ExpirationDate = new DateTime(2024, 7, 23, 12, 14, 7, 794, DateTimeKind.Local).AddTicks(462),
-                            Name = "Product 1",
-                            Price = 100m
-                        },
-                        new
-                        {
-                            Id = new Guid("75f0b781-0172-4a32-bce2-b29dd45e9ff1"),
-                            AvailableQuantity = 20,
-                            Code = "PDT2",
-                            CreatedAt = new DateTime(2024, 6, 23, 12, 14, 7, 794, DateTimeKind.Local).AddTicks(489),
-                            Description = "Product 2 description",
-                            ExpirationDate = new DateTime(2024, 7, 8, 12, 14, 7, 794, DateTimeKind.Local).AddTicks(488),
-                            Name = "Product 2",
-                            Price = 200m
-                        },
-                        new
-                        {
-                            Id = new Guid("5246f94a-3973-4583-9649-eb5116da18fb"),
-                            AvailableQuantity = 30,
-                            Code = "PDT3",
-                            CreatedAt = new DateTime(2024, 6, 23, 12, 14, 7, 794, DateTimeKind.Local).AddTicks(492),
-                            Description = "Product 3 description",
-                            ExpirationDate = new DateTime(2024, 6, 23, 13, 14, 7, 794, DateTimeKind.Local).AddTicks(491),
-                            Name = "Product 3",
-                            Price = 300m
-                        });
                 });
 
             modelBuilder.Entity("InvestmentPortfolioManager.Domain.Entities.Transaction", b =>

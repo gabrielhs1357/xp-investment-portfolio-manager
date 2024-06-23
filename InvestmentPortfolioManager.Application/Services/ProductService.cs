@@ -38,15 +38,6 @@ namespace InvestmentPortfolioManager.Application.Services
             return product.Id;
         }
 
-        public async Task DeactivateAsync(Guid id)
-        {
-            var product = await _productRepository.GetByIdAsync(id);
-
-            product.IsActive = false;
-
-            await _productRepository.UpdateAsync(product);
-        }
-
         public async Task DeleteAsync(Guid id)
         {
             await _productRepository.DeleteAsync(id);

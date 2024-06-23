@@ -1,6 +1,5 @@
 ﻿using InvestmentPortfolioManager.Application.DTOs.Transaction;
 using InvestmentPortfolioManager.Application.Interfaces;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvestmentPortfolioManager.API.Controllers
@@ -24,22 +23,22 @@ namespace InvestmentPortfolioManager.API.Controllers
         }
 
         [HttpPost("buy")]
-        public async Task<ActionResult<IEnumerable<TransactionDto>>> CreateBuyTransaction(
+        public async Task<ActionResult<IEnumerable<TransactionDto>>> Buy(
             Guid clientId,
             [FromBody] CreateTransactionDto transactionDto
         )
         {
-            var transactionId = await _transactionService.CreateBuyTransactionAsync(clientId, transactionDto);
+            var transactionId = await _transactionService.HandleBuyTransactionAsync(clientId, transactionDto);
             return CreatedAtAction(nameof(GetTransactionsByClientId), new { clientId = transactionId }, transactionId);
         }
 
         [HttpPost("sell")]
-        public async Task<ActionResult<IEnumerable<TransactionDto>>> CreateSellTransaction(
+        public async Task<ActionResult<IEnumerable<TransactionDto>>> Sell(
             Guid clientId,
             [FromBody] CreateTransactionDto transactionDto
         )
         {
-            var transactionId = await _transactionService.CreateSellTransactionAsync(clientId, transactionDto);
+            var transactionId = await _transactionService.HandleSellTransactionAsync(clientId, transactionDto);
             await Console.Out.WriteLineAsync(transactionId.ToString());
             return CreatedAtAction(nameof(GetTransactionsByClientId), new { clientId = transactionId }, transactionId);
         }
