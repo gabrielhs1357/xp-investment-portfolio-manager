@@ -1,11 +1,11 @@
-﻿namespace InvestmentPortfolioManager.Application.DTOs.Investment
+﻿using InvestmentPortfolioManager.Application.DTOs.Product;
+
+namespace InvestmentPortfolioManager.Application.DTOs.Investment
 {
     public class InvestmentDto
     {
         public Guid Id { get; set; }
-        public Guid ClientId { get; set; }
-        public Guid ProductId { get; set; }
         public int Quantity { get; set; }
-        public decimal AveragePurchasePrice { get; set; }
+        public required ProductDto Product { get; set; }
     }
 }

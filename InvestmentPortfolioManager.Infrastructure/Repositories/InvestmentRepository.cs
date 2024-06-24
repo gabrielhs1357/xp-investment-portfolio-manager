@@ -25,6 +25,7 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
         {
             return await _context.Investments
                 .Where(i => i.ClientId == clientId)
+                .Include(i => i.Product)
                 .ToListAsync();
         }
 

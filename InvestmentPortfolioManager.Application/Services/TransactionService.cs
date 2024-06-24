@@ -84,9 +84,6 @@ namespace InvestmentPortfolioManager.Application.Services
 
             if (investment != null)
             {
-                var averagePurchasePrice = (investment.AveragePurchasePrice + product.Price) / 2; 
-
-                investment.AveragePurchasePrice = averagePurchasePrice;
                 investment.Quantity += transactionDto.Quantity;
 
                 await _investmentService.UpdateAsync(investment);
@@ -98,7 +95,6 @@ namespace InvestmentPortfolioManager.Application.Services
                     ClientId = clientId,
                     ProductId = product.Id,
                     Quantity = transactionDto.Quantity,
-                    AveragePurchasePrice = product.Price
                 };
 
                 await _investmentService.AddAsync(investmentDto);

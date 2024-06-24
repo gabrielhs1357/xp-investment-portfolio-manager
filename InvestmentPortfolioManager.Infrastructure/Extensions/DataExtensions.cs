@@ -72,8 +72,7 @@ namespace InvestmentPortfolioManager.Infrastructure.Extensions
                     Id = Guid.Parse("f1b3b3b4-1b3b-4b3b-8b3b-3b3b3b3b3b3b"),
                     ClientId = Guid.Parse("752a9e0d-3586-4ff2-8b1f-dbb7c6779d43"),
                     ProductId = Guid.Parse("e8c50f0a-62a7-432f-a3fd-bd44c6d913c0"),
-                    Quantity = 5,
-                    AveragePurchasePrice = 200,
+                    Quantity = 5
                 }
             );
         }

@@ -16,7 +16,10 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
 
         public async Task<IEnumerable<Transaction>> GetByClientIdAsync(Guid clientId)
         {
-            var transactions = await _context.Transactions.Where(t => t.ClientId == clientId).ToListAsync();
+            var transactions = await _context.Transactions
+                .Where(t => t.ClientId == clientId)
+                .Include(t => t.Product)
+                .ToListAsync();
             return transactions;
         }
 
