@@ -44,14 +44,12 @@ namespace InvestmentPortfolioManager.Application.Mappings
             CreateMap<Product, UpdateProductDto>().ReverseMap();
             CreateMap<Product, CreateProductDto>().ReverseMap();
 
-            //CreateMap<Transaction, TransactionDto>().ReverseMap();
             CreateMap<Transaction, CreateTransactionDto>().ReverseMap();
 
             CreateMap<Client, ClientDto>().ReverseMap();
             CreateMap<Client, UpdateClientDto>().ReverseMap();
             CreateMap<Client, CreateClientDto>().ReverseMap();
 
-            //CreateMap<Investment, InvestmentDto>().ReverseMap();
             CreateMap<Investment, UpdateInvestmentDto>().ReverseMap();
             CreateMap<Investment, CreateInvestmentDto>().ReverseMap();
 

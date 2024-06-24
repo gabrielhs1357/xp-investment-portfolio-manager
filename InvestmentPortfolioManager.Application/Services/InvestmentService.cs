@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using InvestmentPortfolioManager.Application.DTOs.Investment;
-using InvestmentPortfolioManager.Application.DTOs.Product;
 using InvestmentPortfolioManager.Application.Interfaces;
 using InvestmentPortfolioManager.Domain.Entities;
 using InvestmentPortfolioManager.Domain.Repositories;
