@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPortfolioManager.API", "InvestmentPortfolioManager\InvestmentPortfolioManager.API.csproj", "{34657D5D-BBC7-4431-A3C2-5F27B41B91E2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvestmentPortfolioManager.API", "InvestmentPortfolioManager\InvestmentPortfolioManager.API.csproj", "{34657D5D-BBC7-4431-A3C2-5F27B41B91E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPortfolioManager.Application", "InvestmentPortfolioManager.Application\InvestmentPortfolioManager.Application.csproj", "{535C1E42-35B6-4559-82F5-781A50601592}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvestmentPortfolioManager.Application", "InvestmentPortfolioManager.Application\InvestmentPortfolioManager.Application.csproj", "{535C1E42-35B6-4559-82F5-781A50601592}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPortfolioManager.Domain", "InvestmentPortfolioManager.Domain\InvestmentPortfolioManager.Domain.csproj", "{146D45E1-530F-47BE-9EB9-9A4DFDD74051}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvestmentPortfolioManager.Domain", "InvestmentPortfolioManager.Domain\InvestmentPortfolioManager.Domain.csproj", "{146D45E1-530F-47BE-9EB9-9A4DFDD74051}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPortfolioManager.Infrastructure", "InvestmentPortfolioManager.Infrastructure\InvestmentPortfolioManager.Infrastructure.csproj", "{E64F2DE0-E72C-4B92-944E-DCC2360A960A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvestmentPortfolioManager.Infrastructure", "InvestmentPortfolioManager.Infrastructure\InvestmentPortfolioManager.Infrastructure.csproj", "{E64F2DE0-E72C-4B92-944E-DCC2360A960A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvestmentPortfolioManager.Worker", "InvestmentPortfolioManager.Worker\InvestmentPortfolioManager.Worker.csproj", "{A954A303-5CF5-431E-A999-8FBE63EFF06A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{E64F2DE0-E72C-4B92-944E-DCC2360A960A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E64F2DE0-E72C-4B92-944E-DCC2360A960A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E64F2DE0-E72C-4B92-944E-DCC2360A960A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A954A303-5CF5-431E-A999-8FBE63EFF06A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A954A303-5CF5-431E-A999-8FBE63EFF06A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A954A303-5CF5-431E-A999-8FBE63EFF06A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A954A303-5CF5-431E-A999-8FBE63EFF06A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

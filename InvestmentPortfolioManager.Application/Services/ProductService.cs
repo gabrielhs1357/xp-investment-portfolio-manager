@@ -49,5 +49,11 @@ namespace InvestmentPortfolioManager.Application.Services
 
             await _productRepository.UpdateAsync(product);
         }
+
+        public async Task<IEnumerable<ProductDto>> GetExpiringProductsAsync()
+        {
+            var products = await _productRepository.GetExpiringProductsAsync();
+            return _mapper.Map<IEnumerable<ProductDto>>(products);
+        }
     }
 }

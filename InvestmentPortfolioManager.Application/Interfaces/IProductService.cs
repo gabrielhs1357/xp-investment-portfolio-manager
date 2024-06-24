@@ -8,5 +8,6 @@ namespace InvestmentPortfolioManager.Application.Interfaces
         Task<Guid> AddAsync(CreateProductDto productDto);
         Task UpdateAsync(ProductDto productDto);
         Task DeleteAsync(Guid id);
+        Task<IEnumerable<ProductDto>> GetExpiringProductsAsync();
     }
 }

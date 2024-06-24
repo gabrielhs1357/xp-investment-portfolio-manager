@@ -16,6 +16,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(typeof(MappingProfile));
+
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<IProductService, ProductService>();
 
@@ -30,8 +32,6 @@ builder.Services.AddTransient<IInvestmentService, InvestmentService>();
 
 builder.Services.AddTransient<IAdminRepository, AdminRepository>();
 builder.Services.AddTransient<IAdminService, AdminService>();
-
-builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 var connectionString = builder.Configuration.GetConnectionString("MainDB");
 builder.Services.AddSqlite<ApplicationContext>(connectionString);

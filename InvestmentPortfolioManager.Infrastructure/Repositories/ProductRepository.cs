@@ -44,5 +44,10 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Product?>> GetExpiringProductsAsync()
+        {
+            return await _context.Products.Where(p => p.ExpirationDate <= DateTime.Now.AddDays(30)).ToListAsync();
+        }
     }
 }

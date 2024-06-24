@@ -9,5 +9,6 @@ namespace InvestmentPortfolioManager.Domain.Repositories
         Task AddAsync(Product? asset);
         Task UpdateAsync(Product asset);
         Task DeleteAsync(Guid id);
+        Task<IEnumerable<Product?>> GetExpiringProductsAsync();
     }
 }

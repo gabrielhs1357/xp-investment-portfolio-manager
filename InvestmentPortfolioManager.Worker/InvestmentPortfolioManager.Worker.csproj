@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-InvestmentPortfolioManager.Worker-d685f9e5-4284-406a-b375-633152aeb684</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.6.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\InvestmentPortfolioManager.Application\InvestmentPortfolioManager.Application.csproj" />
+    <ProjectReference Include="..\InvestmentPortfolioManager.Infrastructure\InvestmentPortfolioManager.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
