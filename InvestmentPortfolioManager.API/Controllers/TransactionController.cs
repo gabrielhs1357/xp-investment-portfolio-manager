@@ -1,4 +1,5 @@
-﻿using InvestmentPortfolioManager.Application.DTOs.Transaction;
+﻿using InvestmentPortfolioManager.Application.DTOs.ClientTransactions;
+using InvestmentPortfolioManager.Application.DTOs.Transaction;
 using InvestmentPortfolioManager.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,17 +10,29 @@ namespace InvestmentPortfolioManager.API.Controllers
     public class TransactionController : ControllerBase
     {
         private readonly ITransactionService _transactionService;
+        private readonly IClientService _clientService;
 
-        public TransactionController(ITransactionService transactionService)
+        public TransactionController(ITransactionService transactionService, IClientService clientService)
         {
             _transactionService = transactionService;
+            _clientService = clientService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TransactionDto>>> GetTransactionsByClientId(Guid clientId)
+        public async Task<ActionResult<IEnumerable<ClientTransactionsDto>>> GetTransactionsByClientId(Guid clientId)
         {
+            var client = await _clientService.GetByIdAsync(clientId);
+
+            if (client == null)
+            {
+                return NotFound("Client not found");
+            }
+
             var transactions = await _transactionService.GetByClientIdAsync(clientId);
-            return Ok(transactions);
+
+            var clientTransactions = _clientService.MapClientTransactionsDto(client, transactions);
+
+            return Ok(clientTransactions);
         }
 
         [HttpPost("buy")]

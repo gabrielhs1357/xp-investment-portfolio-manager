@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using InvestmentPortfolioManager.Application.DTOs.Client;
+using InvestmentPortfolioManager.Application.DTOs.ClientTransactions;
+using InvestmentPortfolioManager.Application.DTOs.Transaction;
 using InvestmentPortfolioManager.Application.Interfaces;
 using InvestmentPortfolioManager.Domain.Entities;
 using InvestmentPortfolioManager.Domain.Repositories;
@@ -15,6 +17,13 @@ namespace InvestmentPortfolioManager.Application.Services
         {
             _clientRepository = clientRepository;
             _mapper = mapper;
+        }
+
+        public ClientTransactionsDto MapClientTransactionsDto(ClientDto client, IEnumerable<TransactionDto> transactions)
+        {
+            var clientTransactions = _mapper.Map<ClientTransactionsDto>(client);
+            clientTransactions.Transactions = transactions;
+            return clientTransactions;
         }
 
         public async Task<Guid> AddAsync(CreateClientDto clientDto)

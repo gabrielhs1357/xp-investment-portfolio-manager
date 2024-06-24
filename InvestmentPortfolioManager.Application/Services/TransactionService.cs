@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using InvestmentPortfolioManager.Application.DTOs.ClientTransactions;
 using InvestmentPortfolioManager.Application.DTOs.Investment;
 using InvestmentPortfolioManager.Application.DTOs.Transaction;
 using InvestmentPortfolioManager.Application.Interfaces;

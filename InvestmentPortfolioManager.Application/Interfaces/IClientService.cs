@@ -1,4 +1,6 @@
 ﻿using InvestmentPortfolioManager.Application.DTOs.Client;
+using InvestmentPortfolioManager.Application.DTOs.ClientTransactions;
+using InvestmentPortfolioManager.Application.DTOs.Transaction;
 
 namespace InvestmentPortfolioManager.Application.Interfaces
 {
@@ -8,5 +10,6 @@ namespace InvestmentPortfolioManager.Application.Interfaces
         Task<ClientDto> GetByIdAsync(Guid id);
         Task<Guid> AddAsync(CreateClientDto clientDto);
         Task UpdateBalanceAsync(Guid clientId, decimal amount);
+        ClientTransactionsDto MapClientTransactionsDto(ClientDto client, IEnumerable<TransactionDto> transactions);
     }
 }
