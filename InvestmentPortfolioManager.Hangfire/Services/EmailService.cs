@@ -1,24 +1,12 @@
-﻿using MailKit.Net.Smtp;
+﻿using InvestmentPortfolioManager.Hangfire.Interfaces;
+using InvestmentPortfolioManager.Hangfire.Settings;
+using InvestmentPortfolioManager.Hangfire.Tasks;
+using MailKit.Net.Smtp;
 using Microsoft.Extensions.Options;
 using MimeKit;
 
-namespace InvestmentPortfolioManager.Hangfire
+namespace InvestmentPortfolioManager.Hangfire.Services
 {
-    public class EmailSettings
-    {
-        public string SmtpServer { get; set; }
-        public int SmtpPort { get; set; }
-        public string SmtpUser { get; set; }
-        public string SmtpPass { get; set; }
-        public string FromEmail { get; set; }
-        public string FromName { get; set; }
-    }
-
-    public interface IEmailService
-    {
-        Task SendIndividualEmailAsync(SendEmailTask emailTask);
-    }
-
     public class EmailService : IEmailService
     {
         private readonly EmailSettings _emailSettings;
@@ -30,31 +18,22 @@ namespace InvestmentPortfolioManager.Hangfire
             _logger = logger;
         }
 
-        public async Task SendIndividualEmailAsync(SendEmailTask emailTask)
+        public async Task SendEmailAsync(SendEmailTask emailTask)
         {
-            var admin = emailTask.Admin;
-            var expiringProducts = emailTask.ExpiringProducts;
-
-            var subject = "Products Expiring Soon! - InvestmentPortfolioManager";
-            var message = $"Hi {admin.FirstName}! The following products are expiring soon:\n\n";
-
-            foreach (var product in expiringProducts)
-            {
-                message += $"- {product.Name} ({product.Code}): expires on {product.ExpirationDate}.\n";
-            }
-
             var emailMessage = new MimeMessage();
-
             emailMessage.From.Add(new MailboxAddress(_emailSettings.FromName, _emailSettings.FromEmail));
-            emailMessage.To.Add(new MailboxAddress(admin.FirstName, admin.Email));
-            emailMessage.Subject = subject;
-            emailMessage.Body = new TextPart("plain") { Text = message };
+            emailMessage.To.Add(new MailboxAddress(emailTask.AdminFirstName, emailTask.AdminEmail));
+            emailMessage.Subject = "Expiring Products";
+            emailMessage.Body = new TextPart("plain")
+            {
+                Text = emailTask.EmailBody
+            };
 
             try
             {
                 using (var client = new SmtpClient())
                 {
-                    _logger.LogInformation($"Sending email to {admin.Email}...");
+                    _logger.LogInformation($"Sending email to {emailTask.AdminEmail}...");
 
                     client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
@@ -73,11 +52,11 @@ namespace InvestmentPortfolioManager.Hangfire
                     _logger.LogInformation($"Disconnecting from SMTP server...");
                     await client.DisconnectAsync(true);
                 }
-                _logger.LogInformation($"Email sent to {admin.Email}");
+                _logger.LogInformation($"Email sent to {emailTask.AdminEmail}");
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error sending email to {admin.Email}: {ex.Message}");
+                _logger.LogError($"Error sending email to {emailTask.AdminEmail}: {ex.Message}");
                 throw; // Re-throw the exception to allow Hangfire to handle retries
             }
         }

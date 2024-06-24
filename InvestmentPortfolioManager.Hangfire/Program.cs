@@ -4,7 +4,11 @@ using InvestmentPortfolioManager.Application.Interfaces;
 using InvestmentPortfolioManager.Application.Mappings;
 using InvestmentPortfolioManager.Application.Services;
 using InvestmentPortfolioManager.Domain.Repositories;
-using InvestmentPortfolioManager.Hangfire;
+using InvestmentPortfolioManager.Hangfire.Builders;
+using InvestmentPortfolioManager.Hangfire.Interfaces;
+using InvestmentPortfolioManager.Hangfire.Services;
+using InvestmentPortfolioManager.Hangfire.Settings;
+using InvestmentPortfolioManager.Hangfire.Workers;
 using InvestmentPortfolioManager.Infrastructure.Context;
 using InvestmentPortfolioManager.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -28,8 +32,10 @@ builder.Services.AddScoped<IAdminService, AdminService>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
-builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IEmailMessageBuilder, EmailMessageBuilder>();
 
 //GlobalJobFilters.Filters.Add(new AutomaticRetryAttribute
 //{
@@ -39,12 +45,9 @@ builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("Emai
 
 builder.Services.AddHangfireServer();
 
-var cronExpression = builder.Configuration.GetSection("HangfireSettings")["CronExpression"];
-
-Console.WriteLine(cronExpression);
-
 var app = builder.Build();
 
+var cronExpression = builder.Configuration.GetSection("HangfireSettings")["CronExpression"];
 var brazilTimeZone = TimeZoneInfo.FindSystemTimeZoneById("E. South America Standard Time"); // Brasília
 
 app.Lifetime.ApplicationStarted.Register(() =>

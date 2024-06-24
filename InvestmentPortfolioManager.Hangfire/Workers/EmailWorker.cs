@@ -2,8 +2,10 @@ using Hangfire;
 using InvestmentPortfolioManager.Application.DTOs.Admin;
 using InvestmentPortfolioManager.Application.DTOs.Product;
 using InvestmentPortfolioManager.Application.Interfaces;
+using InvestmentPortfolioManager.Hangfire.Interfaces;
+using InvestmentPortfolioManager.Hangfire.Tasks;
 
-namespace InvestmentPortfolioManager.Hangfire
+namespace InvestmentPortfolioManager.Hangfire.Workers
 {
     public class EmailWorker
     {
@@ -18,25 +20,29 @@ namespace InvestmentPortfolioManager.Hangfire
 
         public async Task ScheduleEmailsAsync()
         {
-            _logger.LogInformation("Scheduling emails at: {time}", DateTimeOffset.Now);
+            _logger.LogInformation("Enqueuing email tasks at {time}", DateTime.Now);
 
             using (var scope = _scopeFactory.CreateScope())
             {
                 var adminService = scope.ServiceProvider.GetRequiredService<IAdminService>();
                 var productService = scope.ServiceProvider.GetRequiredService<IProductService>();
-                var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
+                var emailMessageBuilder = scope.ServiceProvider.GetRequiredService<IEmailMessageBuilder>();
 
                 var admins = await GetAdmins(adminService);
                 var expiringProducts = await GetExpiringProducts(productService);
 
                 foreach (var admin in admins)
                 {
+                    var emailBody = emailMessageBuilder.BuildEmailBody(admin, expiringProducts);
+
                     var emailTask = new SendEmailTask
                     {
-                        Admin = admin,
-                        ExpiringProducts = expiringProducts
+                        AdminEmail = admin.Email,
+                        AdminFirstName = admin.FirstName,
+                        EmailBody = emailBody
                     };
-                    BackgroundJob.Enqueue(() => emailService.SendIndividualEmailAsync(emailTask));
+
+                    BackgroundJob.Enqueue<IEmailService>(service => service.SendEmailAsync(emailTask));
                 }
             }
         }
@@ -50,11 +56,5 @@ namespace InvestmentPortfolioManager.Hangfire
         {
             return await productService.GetExpiringProductsAsync();
         }
-    }
-
-    public class SendEmailTask
-    {
-        public AdminDto Admin { get; set; }
-        public IEnumerable<ProductDto> ExpiringProducts { get; set; }
     }
 }
