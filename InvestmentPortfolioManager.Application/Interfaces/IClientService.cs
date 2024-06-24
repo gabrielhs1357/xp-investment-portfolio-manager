@@ -9,7 +9,7 @@ namespace InvestmentPortfolioManager.Application.Interfaces
         Task<IEnumerable<ClientDto>> GetAllAsync();
         Task<ClientDto> GetByIdAsync(Guid id);
         Task<Guid> AddAsync(CreateClientDto clientDto);
-        Task UpdateBalanceAsync(Guid clientId, decimal amount);
+        Task UpdateClientAsync(Guid id, UpdateClientDto clientDto);
         ClientTransactionsDto MapClientTransactionsDto(ClientDto client, IEnumerable<TransactionDto> transactions);
         ClientInvestmentsDto MapClientInvestmentsDto(ClientDto client, IEnumerable<InvestmentDto> investments);
         Task<bool> EmailExists(string email);

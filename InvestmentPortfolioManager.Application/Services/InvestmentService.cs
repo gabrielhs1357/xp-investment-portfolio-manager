@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using InvestmentPortfolioManager.Application.DTOs.Investment;
+using InvestmentPortfolioManager.Application.DTOs.Product;
 using InvestmentPortfolioManager.Application.Interfaces;
 using InvestmentPortfolioManager.Domain.Entities;
 using InvestmentPortfolioManager.Domain.Repositories;
@@ -29,20 +30,25 @@ namespace InvestmentPortfolioManager.Application.Services
         public async Task<IEnumerable<InvestmentDto>> GetByClientIdAsync(Guid clientId)
         {
             var investments = await _investmentRepository.GetByClientIdAsync(clientId);
-
             return _mapper.Map<IEnumerable<InvestmentDto>>(investments);
         }
 
         public async Task<InvestmentDto> GetByClientIdAndProductIdAsync(Guid clientId, Guid productId)
         {
             var investment = await _investmentRepository.GetByClientIdAndProductIdAsync(clientId, productId);
-
             return _mapper.Map<InvestmentDto>(investment);
         }
 
-        public async Task UpdateAsync(InvestmentDto investmentDto)
+        public async Task UpdateAsync(Guid id, UpdateInvestmentDto investmentDto)
         {
-            var investment = _mapper.Map<Investment>(investmentDto);
+            var investment = await _investmentRepository.GetByIdAsync(id);
+
+            if (investment == null)
+            {
+                throw new InvalidOperationException("Investment not found"); // throw a BadRequestException
+            }
+
+            _mapper.Map(investmentDto, investment);
 
             await _investmentRepository.UpdateAsync(investment);
         }

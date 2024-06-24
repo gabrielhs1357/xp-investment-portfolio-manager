@@ -6,6 +6,7 @@ namespace InvestmentPortfolioManager.Application.DTOs.Transaction
     {
         [Required]
         public Guid ProductId { get; set; }
+
         [Required]
         [Range(1, int.MaxValue)]
         public int Quantity { get; set; }

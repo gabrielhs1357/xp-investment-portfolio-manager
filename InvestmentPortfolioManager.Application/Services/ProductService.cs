@@ -44,7 +44,7 @@ namespace InvestmentPortfolioManager.Application.Services
 
             if (product == null)
             {
-                throw new Exception("Product not found"); // throw a BadRequestException
+                throw new InvalidOperationException("Product not found"); // throw a BadRequestException
             }
 
             await _productRepository.DeleteAsync(product);
@@ -56,7 +56,7 @@ namespace InvestmentPortfolioManager.Application.Services
 
             if (product == null)
             {
-                throw new Exception("Product not found"); // throw a BadRequestException
+                throw new InvalidOperationException("Product not found"); // throw a BadRequestException
             }
 
             _mapper.Map(productDto, product);

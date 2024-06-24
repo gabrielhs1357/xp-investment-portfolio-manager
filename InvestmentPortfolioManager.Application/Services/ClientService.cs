@@ -52,18 +52,23 @@ namespace InvestmentPortfolioManager.Application.Services
             return _mapper.Map<ClientDto>(client);
         }
 
-        public async Task UpdateBalanceAsync(Guid clientId, decimal balance)
-        {
-            var client = await _clientRepository.GetByIdAsync(clientId);
-
-            client.Balance = balance;
-
-            await _clientRepository.UpdateAsync(client);
-        }
-
         public async Task<bool> EmailExists(string email)
         {
             return await _clientRepository.EmailExists(email);
+        }
+
+        public async Task UpdateClientAsync(Guid id, UpdateClientDto clientDto)
+        {
+            var client = await _clientRepository.GetByIdAsync(id);
+
+            if (client == null)
+            {
+                throw new InvalidOperationException("Client not found"); // throw a BadRequestException
+            }
+
+            _mapper.Map(clientDto, client);
+
+            await _clientRepository.UpdateAsync(client);
         }
     }
 }

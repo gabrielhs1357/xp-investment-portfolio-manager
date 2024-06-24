@@ -52,7 +52,6 @@ namespace InvestmentPortfolioManager.API.Controllers
         )
         {
             var transactionId = await _transactionService.HandleSellTransactionAsync(clientId, transactionDto);
-            await Console.Out.WriteLineAsync(transactionId.ToString());
             return CreatedAtAction(nameof(GetTransactionsByClientId), new { clientId = transactionId }, transactionId);
         }
     }

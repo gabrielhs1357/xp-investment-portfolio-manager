@@ -41,5 +41,10 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
             _context.Investments.Update(investment);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Investment> GetByIdAsync(Guid id)
+        {
+            return await _context.Investments.FindAsync(id);
+        }
     }
 }

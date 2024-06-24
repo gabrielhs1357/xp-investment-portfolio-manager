@@ -12,7 +12,6 @@ namespace InvestmentPortfolioManager.Application.Mappings
     {
         public MappingProfile()
         {
-
             CreateMap<Investment, InvestmentDto>()
                 .ForMember(dest => dest.InvestmentId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Product.Id))
@@ -49,9 +48,11 @@ namespace InvestmentPortfolioManager.Application.Mappings
             CreateMap<Transaction, CreateTransactionDto>().ReverseMap();
 
             CreateMap<Client, ClientDto>().ReverseMap();
+            CreateMap<Client, UpdateClientDto>().ReverseMap();
             CreateMap<Client, CreateClientDto>().ReverseMap();
 
             //CreateMap<Investment, InvestmentDto>().ReverseMap();
+            CreateMap<Investment, UpdateInvestmentDto>().ReverseMap();
             CreateMap<Investment, CreateInvestmentDto>().ReverseMap();
 
             CreateMap<Admin, AdminDto>().ReverseMap();

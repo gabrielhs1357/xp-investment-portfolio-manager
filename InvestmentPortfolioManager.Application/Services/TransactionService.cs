@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using InvestmentPortfolioManager.Application.DTOs.Client;
 using InvestmentPortfolioManager.Application.DTOs.Investment;
+using InvestmentPortfolioManager.Application.DTOs.Product;
 using InvestmentPortfolioManager.Application.DTOs.Transaction;
 using InvestmentPortfolioManager.Application.Interfaces;
 using InvestmentPortfolioManager.Domain.Entities;
@@ -43,61 +45,89 @@ namespace InvestmentPortfolioManager.Application.Services
 
             if (client == null)
             {
-                throw new InvalidOperationException("Client not found");
+                throw new InvalidOperationException("Client not found"); // throw a BadRequestException
             }
 
             var product = await _productService.GetByIdAsync(transactionDto.ProductId);
 
             if (product == null)
             {
-                throw new InvalidOperationException("Product not found");
+                throw new InvalidOperationException("Product not found"); // throw a BadRequestException
             }
 
             if (product.AvailableQuantity < transactionDto.Quantity)
             {
-                throw new InvalidOperationException("Insufficient stock");
+                throw new InvalidOperationException("Insufficient stock"); // throw a BadRequestException
             }
 
-            var totalPrice = transactionDto.Quantity * product.Price;
-
-            var clientBalance = client.Balance - totalPrice;
-
-            if (clientBalance < 0)
+            if (product.Price * transactionDto.Quantity > client.Balance)
             {
-                throw new InvalidOperationException("Insufficient funds");
+                throw new InvalidOperationException("Insufficient funds"); // throw a BadRequestException
             }
 
-            product.AvailableQuantity -= transactionDto.Quantity;
+            if (product.ExpirationDate < DateTime.Now)
+            {
+                throw new InvalidOperationException("Product expired"); // throw a BadRequestException
+            }
 
-            //await _productService.UpdateAsync(product);
+            // Update product
+
+            var updateProductDto = new UpdateProductDto
+            {
+                Name = product.Name,
+                Description = product.Description,
+                AvailableQuantity = product.AvailableQuantity - transactionDto.Quantity,
+                Price = product.Price,
+                ExpirationDate = product.ExpirationDate,
+            };
+
+            await _productService.UpdateAsync(product.Id, updateProductDto);
+
+            // Update client
+
+            var updateClientDto = new UpdateClientDto
+            {
+                Balance = client.Balance - transactionDto.Quantity * product.Price,
+            };
+
+            await _clientService.UpdateClientAsync(client.Id, updateClientDto);
+
+            // Create transaction
 
             var transaction = _mapper.Map<Transaction>(transactionDto);
 
             transaction.ClientId = clientId;
+            transaction.ProductId = product.Id;
+            transaction.Quantity = transactionDto.Quantity;
+            transaction.UnitPrice = product.Price;
+            transaction.TotalPrice = product.Price * transactionDto.Quantity;
             transaction.TransactionType = TransactionType.Buy;
 
             await _transactionRepository.AddAsync(transaction);
 
-            await _clientService.UpdateBalanceAsync(clientId, clientBalance);
+            // Create or update investment
 
             var investment = await _investmentService.GetByClientIdAndProductIdAsync(clientId, product.Id);
 
-            if (investment != null)
+            if (investment == null)
             {
-                investment.Quantity += transactionDto.Quantity;
-
-                await _investmentService.UpdateAsync(investment);
-            }
-            else
-            {
-                var investmentDto = new CreateInvestmentDto
+                var createInvestmentDto = new CreateInvestmentDto
                 {
                     ClientId = clientId,
                     ProductId = product.Id,
-                    Quantity = transactionDto.Quantity,
+                    Quantity = transactionDto.Quantity
                 };
 
-                await _investmentService.AddAsync(investmentDto);
+                await _investmentService.AddAsync(createInvestmentDto);
+            }
+            else
+            {
+                var updateInvestmentDto = new UpdateInvestmentDto
+                {
+                    Quantity = investment.Quantity + transactionDto.Quantity,
+                };
+
+                await _investmentService.UpdateAsync(investment.InvestmentId, updateInvestmentDto);
             }
 
             return transaction.Id;
@@ -105,13 +135,70 @@ namespace InvestmentPortfolioManager.Application.Services
 
         public async Task<Guid> HandleSellTransactionAsync(Guid clientId, CreateTransactionDto transactionDto)
         {
+            var client = await _clientService.GetByIdAsync(clientId);
+
+            if (client == null)
+            {
+                throw new InvalidOperationException("Client not found"); // throw a BadRequestException
+            }
+
+            var product = await _productService.GetByIdAsync(transactionDto.ProductId);
+
+            if (product == null)
+            {
+                throw new InvalidOperationException("Product not found"); // throw a BadRequestException
+            }
+
+            var investment = await _investmentService.GetByClientIdAndProductIdAsync(clientId, transactionDto.ProductId);
+
+            if (investment == null || investment.Quantity < transactionDto.Quantity)
+            {
+                throw new InvalidOperationException("Insufficient investment quantity"); // throw a BadRequestException
+            }
+
+            // Update product
+
+            var updateProductDto = new UpdateProductDto
+            {
+                Name = product.Name,
+                Description = product.Description,
+                AvailableQuantity = product.AvailableQuantity + transactionDto.Quantity,
+                Price = product.Price,
+                ExpirationDate = product.ExpirationDate,
+            };
+
+            await _productService.UpdateAsync(product.Id, updateProductDto);
+
+            // Update client
+
+            var updateClientDto = new UpdateClientDto
+            {
+                Balance = client.Balance + transactionDto.Quantity * product.Price,
+            };
+
+            await _clientService.UpdateClientAsync(client.Id, updateClientDto);
+
+            // Create transaction
+
             var transaction = _mapper.Map<Transaction>(transactionDto);
 
             transaction.ClientId = clientId;
-
+            transaction.ProductId = product.Id;
+            transaction.Quantity = transactionDto.Quantity;
+            transaction.UnitPrice = product.Price;
+            transaction.TotalPrice = product.Price * transactionDto.Quantity;
             transaction.TransactionType = TransactionType.Sell;
 
             await _transactionRepository.AddAsync(transaction);
+
+            // Update investment
+
+            var updateInvestmentDto = new UpdateInvestmentDto
+            {
+                Quantity = investment.Quantity - transactionDto.Quantity,
+            };
+
+            await _investmentService.UpdateAsync(investment.InvestmentId, updateInvestmentDto);
 
             return transaction.Id;
         }

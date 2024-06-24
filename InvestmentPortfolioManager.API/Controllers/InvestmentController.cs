@@ -1,4 +1,4 @@
-﻿using InvestmentPortfolioManager.Application.DTOs.Investment;
+﻿using InvestmentPortfolioManager.Application.DTOs.Client;
 using InvestmentPortfolioManager.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +18,7 @@ namespace InvestmentPortfolioManager.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<InvestmentDto>>> GetInvestmentsByClientId(Guid clientId)
+        public async Task<ActionResult<IEnumerable<ClientInvestmentsDto>>> GetInvestmentsByClientId(Guid clientId)
         {
             var client = await _clientService.GetByIdAsync(clientId);
 
