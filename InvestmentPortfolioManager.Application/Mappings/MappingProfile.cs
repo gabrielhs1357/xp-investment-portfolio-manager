@@ -42,6 +42,7 @@ namespace InvestmentPortfolioManager.Application.Mappings
                 .ForMember(dest => dest.Investments, opt => opt.Ignore());
 
             CreateMap<Product, ProductDto>().ReverseMap();
+            CreateMap<Product, UpdateProductDto>().ReverseMap();
             CreateMap<Product, CreateProductDto>().ReverseMap();
 
             //CreateMap<Transaction, TransactionDto>().ReverseMap();

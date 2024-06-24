@@ -30,24 +30,25 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
         }
         public async Task UpdateAsync(Product product)
         {
+            product.UpdatedAt = DateTime.Now; // TODO: set UpdatedAt in data extensions
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Product product)
         {
-            //await _context.Products.Where(p => p.Id == id).ExecuteDeleteAsync();
-
-            var product = await _context.Products.FindAsync(id);
-
             _context.Products.Remove(product);
-
             await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Product?>> GetExpiringProductsAsync()
         {
             return await _context.Products.Where(p => p.ExpirationDate <= DateTime.Now.AddDays(30)).ToListAsync();
+        }
+
+        public async Task<bool> CodeExists(string code)
+        {
+            return await _context.Products.AnyAsync(p => p.Code == code);
         }
     }
 }

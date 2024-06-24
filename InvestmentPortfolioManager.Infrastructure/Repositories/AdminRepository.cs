@@ -29,5 +29,10 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
             await _context.Admins.AddAsync(admin);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<bool> EmailExists(string email)
+        {
+            return await _context.Admins.AnyAsync(a => a.Email == email);
+        }
     }
 }

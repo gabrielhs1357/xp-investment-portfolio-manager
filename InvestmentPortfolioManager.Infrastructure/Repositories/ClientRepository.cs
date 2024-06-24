@@ -20,6 +20,11 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<bool> EmailExists(string email)
+        {
+            return await _context.Clients.AnyAsync(c => c.Email == email);
+        }
+
         public async Task<IEnumerable<Client>> GetAllAsync()
         {
             return await _context.Clients.ToListAsync();

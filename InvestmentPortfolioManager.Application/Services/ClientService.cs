@@ -60,5 +60,10 @@ namespace InvestmentPortfolioManager.Application.Services
 
             await _clientRepository.UpdateAsync(client);
         }
+
+        public async Task<bool> EmailExists(string email)
+        {
+            return await _clientRepository.EmailExists(email);
+        }
     }
 }

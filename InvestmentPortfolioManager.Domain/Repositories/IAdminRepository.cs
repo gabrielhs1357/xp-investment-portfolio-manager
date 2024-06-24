@@ -7,5 +7,6 @@ namespace InvestmentPortfolioManager.Domain.Repositories
         Task<IEnumerable<Admin>> GetAllAsync();
         Task<Admin?> GetByIdAsync(Guid id);
         Task AddAsync(Admin admin);
+        Task<bool> EmailExists(string email);
     }
 }

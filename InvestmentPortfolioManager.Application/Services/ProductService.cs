@@ -40,12 +40,26 @@ namespace InvestmentPortfolioManager.Application.Services
 
         public async Task DeleteAsync(Guid id)
         {
-            await _productRepository.DeleteAsync(id);
+            var product = await _productRepository.GetByIdAsync(id);
+
+            if (product == null)
+            {
+                throw new Exception("Product not found"); // throw a BadRequestException
+            }
+
+            await _productRepository.DeleteAsync(product);
         }
 
-        public async Task UpdateAsync(ProductDto productDto)
+        public async Task UpdateAsync(Guid id, UpdateProductDto productDto)
         {
-            var product = _mapper.Map<Product>(productDto);
+            var product = await _productRepository.GetByIdAsync(id);
+
+            if (product == null)
+            {
+                throw new Exception("Product not found"); // throw a BadRequestException
+            }
+
+            _mapper.Map(productDto, product);
 
             await _productRepository.UpdateAsync(product);
         }
@@ -54,6 +68,11 @@ namespace InvestmentPortfolioManager.Application.Services
         {
             var products = await _productRepository.GetExpiringProductsAsync();
             return _mapper.Map<IEnumerable<ProductDto>>(products);
+        }
+
+        public async Task<bool> CodeExists(string code)
+        {
+            return await _productRepository.CodeExists(code);
         }
     }
 }

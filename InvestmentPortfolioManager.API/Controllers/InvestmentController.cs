@@ -1,6 +1,5 @@
 ﻿using InvestmentPortfolioManager.Application.DTOs.Investment;
 using InvestmentPortfolioManager.Application.Interfaces;
-using InvestmentPortfolioManager.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvestmentPortfolioManager.API.Controllers

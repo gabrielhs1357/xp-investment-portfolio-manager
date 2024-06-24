@@ -69,7 +69,7 @@ namespace InvestmentPortfolioManager.Application.Services
 
             product.AvailableQuantity -= transactionDto.Quantity;
 
-            await _productService.UpdateAsync(product);
+            //await _productService.UpdateAsync(product);
 
             var transaction = _mapper.Map<Transaction>(transactionDto);
 

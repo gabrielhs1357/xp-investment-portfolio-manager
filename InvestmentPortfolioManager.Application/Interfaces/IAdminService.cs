@@ -7,5 +7,6 @@ namespace InvestmentPortfolioManager.Application.Interfaces
         Task<IEnumerable<AdminDto>> GetAllAsync();
         Task<AdminDto> GetByIdAsync(Guid id);
         Task<Guid> AddAsync(CreateAdminDto createAdminDto);
+        Task<bool> EmailExists(string email);
     }
 }

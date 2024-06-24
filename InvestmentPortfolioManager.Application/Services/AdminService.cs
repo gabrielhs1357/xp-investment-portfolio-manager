@@ -35,5 +35,10 @@ namespace InvestmentPortfolioManager.Application.Services
             await _adminRepository.AddAsync(admin);
             return admin.Id;
         }
+
+        public async Task<bool> EmailExists(string email)
+        {
+            return await _adminRepository.EmailExists(email);
+        }
     }
 }

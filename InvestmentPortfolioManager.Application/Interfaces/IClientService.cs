@@ -12,5 +12,6 @@ namespace InvestmentPortfolioManager.Application.Interfaces
         Task UpdateBalanceAsync(Guid clientId, decimal amount);
         ClientTransactionsDto MapClientTransactionsDto(ClientDto client, IEnumerable<TransactionDto> transactions);
         ClientInvestmentsDto MapClientInvestmentsDto(ClientDto client, IEnumerable<InvestmentDto> investments);
+        Task<bool> EmailExists(string email);
     }
 }
