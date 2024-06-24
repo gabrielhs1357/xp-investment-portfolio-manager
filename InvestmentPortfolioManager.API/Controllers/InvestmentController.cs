@@ -1,5 +1,6 @@
 ﻿using InvestmentPortfolioManager.Application.DTOs.Investment;
 using InvestmentPortfolioManager.Application.Interfaces;
+using InvestmentPortfolioManager.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvestmentPortfolioManager.API.Controllers
@@ -9,17 +10,29 @@ namespace InvestmentPortfolioManager.API.Controllers
     public class InvestmentController : ControllerBase
     {
         private readonly IInvestmentService _investmentService;
+        private readonly IClientService _clientService;
 
-        public InvestmentController(IInvestmentService investmentService)
+        public InvestmentController(IInvestmentService investmentService, IClientService clientService)
         {
             _investmentService = investmentService;
+            _clientService = clientService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InvestmentDto>>> GetInvestmentsByClientId(Guid clientId)
         {
+            var client = await _clientService.GetByIdAsync(clientId);
+
+            if (client == null)
+            {
+                return NotFound("Client not found");
+            }
+
             var investments = await _investmentService.GetByClientIdAsync(clientId);
-            return Ok(investments);
+
+            var clientInvestments = _clientService.MapClientInvestmentsDto(client, investments);
+
+            return Ok(clientInvestments);
         }
     }
 }

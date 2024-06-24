@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using InvestmentPortfolioManager.Application.DTOs.Admin;
 using InvestmentPortfolioManager.Application.DTOs.Client;
-using InvestmentPortfolioManager.Application.DTOs.ClientTransactions;
 using InvestmentPortfolioManager.Application.DTOs.Investment;
 using InvestmentPortfolioManager.Application.DTOs.Product;
 using InvestmentPortfolioManager.Application.DTOs.Transaction;
@@ -13,6 +12,13 @@ namespace InvestmentPortfolioManager.Application.Mappings
     {
         public MappingProfile()
         {
+
+            CreateMap<Investment, InvestmentDto>()
+                .ForMember(dest => dest.InvestmentId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Product.Id))
+                .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))
+                .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity));
+
             CreateMap<Transaction, TransactionDto>()
                 .ForMember(dest => dest.TransactionId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(src => src.Product.Id))
@@ -29,6 +35,12 @@ namespace InvestmentPortfolioManager.Application.Mappings
                 .ForMember(dest => dest.Balance, opt => opt.MapFrom(src => src.Balance))
                 .ForMember(dest => dest.Transactions, opt => opt.Ignore());
 
+            CreateMap<ClientDto, ClientInvestmentsDto>()
+                .ForMember(dest => dest.ClientId, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.ClientName, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+                .ForMember(dest => dest.Balance, opt => opt.MapFrom(src => src.Balance))
+                .ForMember(dest => dest.Investments, opt => opt.Ignore());
+
             CreateMap<Product, ProductDto>().ReverseMap();
             CreateMap<Product, CreateProductDto>().ReverseMap();
 
@@ -38,7 +50,7 @@ namespace InvestmentPortfolioManager.Application.Mappings
             CreateMap<Client, ClientDto>().ReverseMap();
             CreateMap<Client, CreateClientDto>().ReverseMap();
 
-            CreateMap<Investment, InvestmentDto>().ReverseMap();
+            //CreateMap<Investment, InvestmentDto>().ReverseMap();
             CreateMap<Investment, CreateInvestmentDto>().ReverseMap();
 
             CreateMap<Admin, AdminDto>().ReverseMap();

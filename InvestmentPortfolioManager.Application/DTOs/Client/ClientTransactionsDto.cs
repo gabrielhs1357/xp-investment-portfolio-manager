@@ -1,8 +1,8 @@
 ﻿using InvestmentPortfolioManager.Application.DTOs.Transaction;
 
-namespace InvestmentPortfolioManager.Application.DTOs.ClientTransactions
+namespace InvestmentPortfolioManager.Application.DTOs.Client
 {
-    public class ClientTransactionsDto // TODO: move to Client folder?
+    public class ClientTransactionsDto
     {
         public Guid ClientId { get; set; }
         public required string ClientName { get; set; }

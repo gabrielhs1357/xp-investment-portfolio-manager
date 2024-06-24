@@ -1,5 +1,4 @@
-﻿using InvestmentPortfolioManager.Application.DTOs.ClientTransactions;
-using InvestmentPortfolioManager.Application.DTOs.Transaction;
+﻿using InvestmentPortfolioManager.Application.DTOs.Transaction;
 
 namespace InvestmentPortfolioManager.Application.Interfaces
 {

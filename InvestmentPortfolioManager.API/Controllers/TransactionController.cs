@@ -1,4 +1,4 @@
-﻿using InvestmentPortfolioManager.Application.DTOs.ClientTransactions;
+﻿using InvestmentPortfolioManager.Application.DTOs.Client;
 using InvestmentPortfolioManager.Application.DTOs.Transaction;
 using InvestmentPortfolioManager.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;

@@ -18,8 +18,6 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
         {
             var transactions = await _context.Transactions
                 .Where(t => t.ClientId == clientId)
-                .Include(t => t.Client)
-                .Include(t => t.Product)
                 .ToListAsync();
             return transactions;
         }
