@@ -1,3 +1,4 @@
+using Hangfire;
 using InvestmentPortfolioManager.API.Extensions;
 using InvestmentPortfolioManager.Application.Interfaces;
 using InvestmentPortfolioManager.Application.Mappings;
@@ -33,7 +34,7 @@ builder.Services.AddTransient<IInvestmentService, InvestmentService>();
 builder.Services.AddTransient<IAdminRepository, AdminRepository>();
 builder.Services.AddTransient<IAdminService, AdminService>();
 
-var connectionString = builder.Configuration.GetConnectionString("MainDB");
+var connectionString = builder.Configuration.GetConnectionString("ApplicationDB");
 builder.Services.AddSqlite<ApplicationContext>(connectionString);
 
 var app = builder.Build();
@@ -48,7 +49,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-
 
 app.MapControllers();
 await app.MigrateDbAsync();
