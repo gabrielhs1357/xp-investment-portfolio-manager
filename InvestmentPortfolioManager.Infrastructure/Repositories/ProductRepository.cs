@@ -25,13 +25,13 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
 
         public async Task AddAsync(Product product)
         {
-            product.CreatedAt = DateTime.Now; // TODO: set CreatedAt in data extensions
+            product.CreatedAt = DateTime.Now;
             await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
         }
         public async Task UpdateAsync(Product product)
         {
-            product.UpdatedAt = DateTime.Now; // TODO: set UpdatedAt in data extensions
+            product.UpdatedAt = DateTime.Now;
             _context.Products.Update(product);
             await _context.SaveChangesAsync();
         }

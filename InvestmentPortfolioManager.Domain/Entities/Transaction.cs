@@ -35,12 +35,12 @@ namespace InvestmentPortfolioManager.Domain.Entities
         public TransactionType TransactionType { get; set; }
 
         [Required]
-        public DateTime CreatedAt { get; set; } // TODO: auto generate on creation
+        public DateTime CreatedAt { get; set; }
 
         [ForeignKey(nameof(ClientId))]
-        public Client Client { get; set; } // TODO: required?
+        public Client Client { get; set; }
 
         [ForeignKey(nameof(ProductId))]
-        public Product Product { get; set; } // TODO: required?
+        public Product Product { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace InvestmentPortfolioManager.Domain.Entities
 
         [Required]
         [StringLength(10)]
-        public required string Code { get; set; } // TODO: add unique constraint
+        public required string Code { get; set; }
 
         [Required]
         [StringLength(100)]
@@ -34,9 +34,9 @@ namespace InvestmentPortfolioManager.Domain.Entities
         [Required]
         public DateTime ExpirationDate { get; set; }
 
-        public DateTime? UpdatedAt { get; set; } // TODO: auto generate on update
+        public DateTime? UpdatedAt { get; set; }
 
         [Required]
-        public DateTime CreatedAt { get; set; } // TODO: auto generate on creation
+        public DateTime CreatedAt { get; set; }
     }
 }

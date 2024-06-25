@@ -21,19 +21,11 @@ namespace InvestmentPortfolioManager.Domain.Entities
         [Required]
         [EmailAddress]
         [StringLength(100)]
-        public required string Email { get; set; } // TODO: Add unique constraint
+        public required string Email { get; set; }
 
         [Required]
         [Range(0, double.MaxValue)]
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Balance { get; set; }
-
-        // TODO: add navigation properties
-
-        //[InverseProperty("Client")]
-        //public ICollection<Investment> Investments { get; set; }
-
-        //[InverseProperty("Client")]
-        //public ICollection<Transaction> Transactions { get; set; }
     }
 }

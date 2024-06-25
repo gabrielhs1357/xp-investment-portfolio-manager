@@ -25,7 +25,7 @@ namespace InvestmentPortfolioManager.Infrastructure.Repositories
 
         public async Task AddAsync(Transaction trasaction)
         {
-            trasaction.CreatedAt = DateTime.UtcNow; // TODO: auto generate on creation
+            trasaction.CreatedAt = DateTime.UtcNow;
             await _context.Transactions.AddAsync(trasaction);
             await _context.SaveChangesAsync();
         }
