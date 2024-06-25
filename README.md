@@ -141,7 +141,7 @@ Componentes:
    ```
 3. Realize as configurações de SMTP
 
-   Substitua as configurações de SMTP em `InvestmentPortfolioManager.Hangfire\appsettings.json`. [Aqui](https://www.hostinger.com.br/tutoriais/aprenda-a-utilizar-o-smtp-google) está um guia mais detalhado sobre seu fncionamento. Você também deve precisar criar uma senha de app em https://myaccount.google.com/apppasswords para utiliza-la no lugar da senha da sua conta Google.
+   Substitua as configurações de SMTP em [InvestmentPortfolioManager.Hangfire/appsettings.json](https://github.com/gabrielhs1357/xp-investment-portfolio-manager/blob/main/InvestmentPortfolioManager.Hangfire/appsettings.json). [Aqui](https://www.hostinger.com.br/tutoriais/aprenda-a-utilizar-o-smtp-google) está um guia mais detalhado sobre seu funcionamento. Você também deve precisar criar uma senha de app em https://myaccount.google.com/apppasswords para utiliza-la no lugar da senha da sua conta Google.
    
 5. Executar o Hangfire
 
