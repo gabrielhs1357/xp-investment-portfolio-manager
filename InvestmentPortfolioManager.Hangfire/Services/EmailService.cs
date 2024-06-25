@@ -23,7 +23,7 @@ namespace InvestmentPortfolioManager.Hangfire.Services
             var emailMessage = new MimeMessage();
             emailMessage.From.Add(new MailboxAddress(_emailSettings.FromName, _emailSettings.FromEmail));
             emailMessage.To.Add(new MailboxAddress(emailTask.AdminFirstName, emailTask.AdminEmail));
-            emailMessage.Subject = "Expiring Products";
+            emailMessage.Subject = "Products Expiring Soon! - InvestmentPortfolioManager";
             emailMessage.Body = new TextPart("plain")
             {
                 Text = emailTask.EmailBody
