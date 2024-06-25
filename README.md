@@ -9,11 +9,11 @@
 ## 📌 Conteúdo
 
 * [Visão geral](#-visão-geral)
-* [Disclaimers](#-disclaimers)
+* [Disclaimers](#%EF%B8%8F-disclaimers)
 * [Funcionalidades](#-funcionalidades)
 * [Tecnologias e ferramentas](#-tecnologias-e-ferramentas)
 * [Estrutura do projeto](#-estrutura-do-projeto)
-* [Requisitos](#-requisitos)
+* [Requisitos](#%EF%B8%8F-requisitos)
 * [Como executar](#-como-executar)
 * [API](#-api)
 * [Hangfire](#-hangfire)
