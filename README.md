@@ -27,7 +27,7 @@ Este projeto faz parte de um desafio técnico realizado para uma empresa do ramo
 ## 🗣️ Disclaimers
 
 - Este README está sendo escrito pouco tempo depois do prazo final para entrega do projeto. Infelizmente não tive tempo suficiente para focar na documentação durante o desenvolvimento, uma vez que concentrei todas os meus esforços entregar um MVP final de qualidade.
-- Também precisei adicionar um commit posterior ao prazo final contendo um pequeno fix: os diretórios que armazenam os bancos de dados (`InvestmentPortfolioManager.Infrastructure\Database` e `InvestmentPortfolioManager.Hangfire\Database`) não existam, já que estavazam vazios uma vez que os arquivos do SQLite (.db) estavam no .gitignore. Para evitar esse problema, adicionei dois arquivos .gitkeep, um em cada diretório.
+- Também precisei adicionar um commit posterior ao prazo final contendo um pequeno fix: os diretórios que armazenam os bancos de dados (`InvestmentPortfolioManager.Infrastructure\Database` e `InvestmentPortfolioManager.Hangfire\Database`) não existiam, já que estavazam vazios uma vez que os arquivos do SQLite (.db) estavam no .gitignore. Para evitar esse problema, adicionei dois arquivos .gitkeep, um em cada diretório.
 - Os endpoints não contam com autenticação e nem autorização com a finalidade de facilitar os testes.
 
 ## 🚀 Funcionalidades
